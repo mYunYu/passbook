@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: Passbook
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/passbook?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&verifyServerCertificate=false&useSSL=false&useAffectedRows=true
+    username: root
+    password: 123456
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      group-id: passbook
+    listener:
+      concurrency: 4 #\u5E76\u53D1\u6D88\u8D39\u4E2A\u6570
+  data:
+    hbase:
+      quorum: 127.0.0.1:2181
+      rootDir: file:///F:/kafka/hbase_data/root_dir
+      nodeParent: /hbase
+  redis:
+    host: 127.0.0.1
+    port: 6379
+server:
+  port: 9528
+logging:
+  level: debug
+  file: passbook.log
+
+
