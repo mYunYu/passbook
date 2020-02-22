@@ -9,7 +9,7 @@ public class Constants {
     public static final String TEMPLATE_TOPIC = "merchants-template";
 
     //token 文件存放目录
-    public static final String TOKEN_DIR = "/tmp/token/";
+    public static final String TOKEN_DIR = "F:/token/";
 
     //已使用的 token 文件名后缀
     public static final String USED_TOKEN_SUFFIX = "_";

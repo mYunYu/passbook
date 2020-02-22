@@ -1,6 +1,7 @@
 package com.jju.passbook.utils;
 
 import com.jju.passbook.vo.Feedback;
+import com.jju.passbook.vo.GainPassTemplateRequest;
 import com.jju.passbook.vo.PassTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -13,7 +14,7 @@ public class RowKeyGenUtil {
 
     /**
      *  根据提供的 PassTemplate 对象生成 RowKey
-     * @param passTemplate
+     * @param passTemplate  PassTemplate
      * @return
      */
     public static String genPassTemplateRowKey(PassTemplate passTemplate){
@@ -25,8 +26,20 @@ public class RowKeyGenUtil {
     }
 
     /**
+     *  根据提供的领取优惠券请求生成 RowKey，只可以在领取优惠券的时候使用
+     *  Pass RowKey = reversed(userId) + inverse(timestamp) + PassTemplate RowKey
+     * @param request   GainPassTemplateRequest
+     * @return
+     */
+    public static String genPassRowKey(GainPassTemplateRequest request){
+        return new StringBuilder(String.valueOf(request.getUserId())).reverse().toString()
+                + (Long.MAX_VALUE - System.currentTimeMillis())
+                + genPassTemplateRowKey(request.getPassTemplate());
+    }
+
+    /**
      *  根据 Feedback 构造 RowKey
-     * @param feedback
+     * @param feedback  Feedback
      * @return
      */
     public static String genFeedbackRowKey(Feedback feedback){
